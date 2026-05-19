@@ -1,0 +1,160 @@
+{
+  "site": {
+    "name": "无限故事",
+    "title": "无限故事 - 创作你的专属小说",
+    "description": "AI驱动的互动小说创作平台，由你决定故事走向"
+  },
+  "nav": {
+    "novels": "小说库",
+    "create": "创作小说",
+    "dashboard": "个人中心",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出"
+  },
+  "home": {
+    "hero": {
+      "title1": "无限",
+      "title2": "故事",
+      "subtitle": "创作属于你的互动小说。自主选择故事走向，满足你的幻想。",
+      "startBtn": "开始创作",
+      "browseBtn": "浏览故事"
+    },
+    "features": {
+      "choose": {
+        "title": "选择",
+        "heading": "互动选择",
+        "desc": "每章结束时，从多个故事走向中做出选择。你的决定塑造故事的发展。"
+      },
+      "create": {
+        "title": "创作",
+        "heading": "AI驱动写作",
+        "desc": "根据你的选择生成精彩内容。每个故事都是独一无二的。"
+      },
+      "own": {
+        "title": "拥有",
+        "heading": "你的故事",
+        "desc": "保存、分享你的个性化小说。共享你自己的幻想故事库。"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "欢迎回来",
+      "subtitle": "登录以继续你的故事",
+      "email": "邮箱",
+      "password": "密码",
+      "submit": "登录",
+      "loading": "登录中...",
+      "noAccount": "还没有账号？",
+      "signUp": "立即注册"
+    },
+    "register": {
+      "title": "创建账号",
+      "subtitle": "开始你的无限故事之旅",
+      "nickname": "昵称",
+      "email": "邮箱",
+      "password": "密码",
+      "confirmPassword": "确认密码",
+      "submit": "创建账号",
+      "loading": "创建中...",
+      "hasAccount": "已有账号？",
+      "signIn": "立即登录"
+    }
+  },
+  "dashboard": {
+    "title": "个人中心",
+    "welcome": "欢迎回来",
+    "actions": {
+      "create": {
+        "title": "创作新故事",
+        "desc": "开始一段新的互动小说冒险"
+      },
+      "browse": {
+        "title": "浏览故事",
+        "desc": "发现其他创作者的故事"
+      }
+    },
+    "myStories": "我的故事",
+    "empty": "你还没有创建任何故事",
+    "emptyBtn": "创建你的第一个故事",
+    "chapters": "章"
+  },
+  "novel": {
+    "create": {
+      "title": "创作新故事",
+      "storyTitle": "故事标题",
+      "titlePlaceholder": "输入你的故事标题",
+      "genre": "类型",
+      "style": "写作风格",
+      "genres": {
+        "Fantasy": "玄幻",
+        "Sci-Fi": "科幻",
+        "Mystery": "悬疑",
+        "Romance": "言情",
+        "Horror": "恐怖",
+        "Adventure": "冒险",
+        "Historical": "历史",
+        "Modern": "都市",
+        "Wuxia": "武侠",
+        "Xianxia": "仙侠"
+      },
+      "styles": {
+        "Light": "轻松",
+        "Serious": "严肃",
+        "Humorous": "幽默",
+        "Dark": "黑暗",
+        "Epic": "史诗",
+        "Romantic": "浪漫",
+        "Suspenseful": "悬疑",
+        "Action-packed": "热血"
+      },
+      "setting": "世界设定（可选）",
+      "settingPlaceholder": "描述你的故事世界或背景设定...",
+      "prompt": "故事开头",
+      "promptPlaceholder": "描述你的故事如何开始。主角是什么样的？初始情境是什么？",
+      "submitBtn": "创作故事",
+      "loading": "正在创作你的故事...",
+      "error": "请填写所有必填字段"
+    },
+    "detail": {
+      "chapters": "章",
+      "generateChoices": "生成下一章选项",
+      "generating": "正在生成选项...",
+      "chooseTitle": "选择下一个方向：",
+      "generatingChapter": "正在生成下一章，请稍候..."
+    },
+    "reader": {
+      "chapterList": "目录",
+      "theme": "主题",
+      "fontSize": "字号",
+      "prevChapter": "上一章",
+      "nextChapter": "下一章",
+      "themes": {
+        "light": "默认",
+        "dark": "夜间",
+        "sepia": "羊皮纸",
+        "green": "护眼"
+      }
+    },
+    "list": {
+      "title": "故事库",
+      "createBtn": "创作新故事",
+      "empty": "还没有故事。成为第一个创作者吧！",
+      "emptyBtn": "创作你的故事",
+      "by": "作者"
+    }
+  },
+  "footer": {
+    "desc": "探索无限的故事可能性",
+    "about": "关于我们",
+    "terms": "服务条款",
+    "copyright": "© 2024 无限故事。保留所有权利。"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "unauthorized": "请先登录",
+    "success": "操作成功"
+  }
+}

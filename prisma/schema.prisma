@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// 用户表
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String
+  nickname        String?
+  avatar          String?
+  credits         Int       @default(100) // 初始赠送100算力
+  level           Int       @default(1) // 1=免费用户, 2=会员
+  membershipPlan  String?   // monthly, quarterly, yearly
+  membershipStart DateTime? // 会员开始时间
+  membershipEnd   DateTime? // 会员到期时间
+  dailyFreeUsed   Int       @default(0) // 今日已用免费额度
+  dailyFreeResetAt String?  // 上次重置日期 (YYYY-MM-DD)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  novels        Novel[]
+  creditLogs    CreditLog[]
+  orders        Order[]
+  sessions      Session[]
+  subscriptions Subscription[]
+}
+
+// 会话表 (NextAuth)
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// 小说表
+model Novel {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  genre     String   // 类型：玄幻、都市、科幻、悬疑、言情等
+  style     String   // 风格：轻松、严肃、幽默、黑暗等
+  setting   String?  // 背景设定
+  status    String   @default("draft") // draft, publish, archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapters Chapter[]
+}
+
+// 章节表
+model Chapter {
+  id            String   @id @default(cuid())
+  novelId       String
+  chapterNumber Int
+  title         String
+  content       String
+  choices       String?  // JSON: 用户选择的走向
+  selectedChoice Int?    // 用户选择的选项索引
+  createdAt     DateTime @default(now())
+
+  novel Novel @relation(fields: [novelId], references: [id], onDelete: Cascade)
+}
+
+// 算力记录表
+model CreditLog {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   // recharge, consume
+  amount      Int
+  description String?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// 订单表
+model Order {
+  id            String   @id @default(cuid())
+  userId        String
+  orderType     String   @default("credit") // credit, subscription
+  amount        Float    // 支付金额(人民币)
+  credits       Int      @default(0) // 获得的算力(订阅订单为0)
+  plan          String?  // monthly, quarterly, yearly(订阅订单)
+  status        String   @default("pending") // pending, completed, failed, refunded
+  paymentMethod String?  // alipay
+  paymentId     String?  // 支付宝交易号
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscription Subscription[]
+}
+
+// 订阅记录表
+model Subscription {
+  id        String   @id @default(cuid())
+  userId    String
+  plan      String   // monthly, quarterly, yearly
+  amount    Float    // 支付金额(人民币)
+  status    String   @default("active") // active, expired, cancelled
+  startAt   DateTime @default(now())
+  endAt     DateTime // 到期时间
+  orderId   String?  // 关联订单ID
+  createdAt DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order Order? @relation(fields: [orderId], references: [id])
+}
