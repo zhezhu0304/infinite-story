@@ -9,13 +9,13 @@ RUN npm ci
 
 # --- Prisma Generate ---
 FROM deps AS prisma
-COPY prisma ./prisma
-COPY prisma.config.ts ./
+COPY . .
 RUN npx prisma generate
 
 # --- Build ---
 FROM deps AS builder
 COPY --from=prisma /app/src/generated ./src/generated
+COPY --from=prisma /app/prisma ./prisma
 COPY . .
 RUN npm run build
 
@@ -36,7 +36,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Prisma engine + CLI (needed for migrate deploy)
 COPY --from=prisma /app/node_modules ./node_modules
-COPY --from=prisma /app/prisma ./prisma
+COPY --from=builder /app/prisma ./prisma
 COPY --from=prisma /app/prisma.config.ts ./
 COPY --from=prisma /app/src/generated ./src/generated
 
