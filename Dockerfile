@@ -35,13 +35,13 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Prisma engine + CLI (needed for migrate deploy)
-COPY --from=prisma /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=prisma /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=prisma /app/node_modules/prisma ./node_modules/prisma
 COPY --from=prisma /app/prisma ./prisma
 COPY --from=prisma /app/prisma.config.ts ./
 COPY --from=prisma /app/node_modules/.bin/prisma ./node_modules/.bin/prisma
 COPY --from=prisma /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
+COPY --from=prisma /app/src/generated ./src/generated
 
 # Entrypoint script
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
