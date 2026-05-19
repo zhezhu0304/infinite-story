@@ -17,6 +17,7 @@ FROM deps AS builder
 COPY --from=prisma /app/src/generated ./src/generated
 COPY --from=prisma /app/prisma ./prisma
 COPY . .
+RUN echo "=== builder prisma ===" && ls -la prisma/ && echo "=== builder schema ===" && cat prisma/schema.prisma | head -5
 RUN npm run build
 
 # --- Production ---
@@ -39,6 +40,7 @@ COPY --from=prisma /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
 COPY --from=prisma /app/prisma.config.ts ./
 COPY --from=prisma /app/src/generated ./src/generated
+RUN echo "=== runner prisma ===" && ls -la prisma/ && echo "=== runner schema ===" && ls -la prisma/schema.prisma
 
 # Entrypoint script
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
