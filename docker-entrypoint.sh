@@ -1,5 +1,5 @@
 #!/bin/sh
-# 运行数据库迁移
+mkdir -p /app/data
+touch /app/data/prod.db
 npx prisma migrate deploy
-# 启动 Next.js
 exec node server.js

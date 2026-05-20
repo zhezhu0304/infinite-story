@@ -43,6 +43,9 @@ COPY --from=prisma /app/src/generated ./src/generated
 COPY prisma/schema.prisma ./prisma/schema.prisma
 COPY prisma/migrations ./prisma/migrations
 
+# Set permissions for prisma directory
+RUN mkdir -p /app/prisma && chown -R nextjs:nodejs /app/prisma
+
 # Entrypoint script
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x docker-entrypoint.sh

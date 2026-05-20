@@ -4,14 +4,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./data:/app/prisma
+      - ./data:/app/data
     env_file:
       - .env.production
     environment:
-      DATABASE_URL: "file:/app/prisma/prod.db"
+      DATABASE_URL: "file:/app/data/prod.db"
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
